@@ -11,6 +11,8 @@ import struct
 import textwrap
 import uuid
 
+def escape_netname(n):
+    return n.replace('\\', '\\\\')
 
 class SchSymbol:
     def __init__ (self, filename, bin_file):
@@ -1085,7 +1087,7 @@ class Schematic:
                 rotation = ci["rotation"]
 
                 uu = uuid.uuid4()
-                ksch.write(f"  (label \"{ci['name']}\" (at {x:.3f} {y:.3f} {rotation})\n")
+                ksch.write(f"  (label \"{escape_netname(ci['name'])}\" (at {x:.3f} {y:.3f} {rotation})\n")
                 ksch.write( "    (effects (font (size 1.0 1.0)) (justify left bottom))\n")
                 ksch.write(f"    (uuid {uu})\n")
                 ksch.write( "  )\n")
